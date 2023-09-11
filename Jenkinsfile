@@ -102,7 +102,7 @@ pipeline {
 
         stage('Deploy to Production') {
             steps {
-                echo "Deploy to a production server. (e.g., AWS EC2)"
+                echo "Deploy to a production server.. (e.g., AWS EC2)"
             }
         }
     }
