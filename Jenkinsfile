@@ -1,17 +1,10 @@
 pipeline {
     agent any
 
-    environment {
-        DIRECTORY_PATH = '/users/thamashagalahena/dekstop/jenkinsfile'
-        TESTING_ENVIRONMENT = 'testing'
-        PRODUCTION_ENVIRONMENT = 'Thamasha Galahena'
-    }
-
     stages {
         stage('Build') {
             steps {
-                echo "Fetching the source code from the directory path specified by the environment variable: $DIRECTORY_PATH"
-                echo "Compiling the code and generating any necessary artifacts"
+                echo "Use Maven or any build tool to compile and package your code"
             }
             post{
                 success{
@@ -23,42 +16,80 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Running unit tests"
-                echo "Running integration tests"
+                echo "Use test automation tools for unit and integration tests (e.g., JUnit)"
             }
+            post {
+                success {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Unit and Integration Test Stage: Success",
+                        body: "Unit and Integration Test Stage was successful.",
+                        attachLog: true
+                }
+                failure {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Unit and Integration Test Stage: Failure",
+                        body: "Unit and Integration Test Stage failed.",
+                        attachLog: true
+                }
+        }
         }
 
         stage('Code Analysis') {
             steps {
-                echo "Checking the quality of the code"
+                echo "Integrate a code analysis tool (e.g., SonarQube) to analyze the code"
             }
-        }
 
         stage('Security Scan') {
             steps {
-                echo "Deploying the application to a testing environment specified by the environment variable: $TESTING_ENVIRONMENT"
+                echo "Integrate a security scanning tool (e.g., OWASP ZAP) to scan the code"
             }
+            post {
+                success {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Security Scan Stage: Success",
+                        body: "The security scan stage was successful.",
+                        attachLog: true
+                }
+                failure {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Security Scan Stage: Failure",
+                        body: "The security scan stage failed.",
+                        attachLog: true
+                }
+        }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo "Waiting for manual approval..."
-                sleep(time: 10, unit: 'SECONDS')
+                echo "Deploy to a staging server (e.g., AWS EC2)"
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
-                echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
+                echo "Run integration tests on the staging environment (e.g., Selenium WebDriver)"
             }
+            post {
+                success {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Integration Tests on Staging Stage: Success",
+                        body: "Integration Tests on Staging stage was successful.",
+                        attachLog: true
+                }
+                failure {
+                        mail to: "thamasha1996@gmail.com",
+                        subject: "Integration Tests on Staging Stage: Failure",
+                        body: "Integration Tests on Staging Stage failed.",
+                        attachLog: true
+                }
+        }
         }
 
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
-                echo "Testing automatic trigger"
+                echo "Deploy to a production server (e.g., AWS EC2)"
             }
         }
     }
