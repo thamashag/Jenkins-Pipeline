@@ -6,14 +6,6 @@ pipeline {
             steps {
                 echo "Use Maven or any build tool to compile and package your code"
             }
-            post{
-                success{
-                    mail to: "thamasha1996@gmail.com",
-                    subject: "Build status email",
-                    body: "Build was successful!"
-
-                }
-            }
         }
 
         stage('Unit and Integration Tests') {
