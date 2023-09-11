@@ -58,6 +58,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo "Deploying the code to the production environment: $PRODUCTION_ENVIRONMENT"
+                echo "Testing automatic trigger"
             }
         }
     }
