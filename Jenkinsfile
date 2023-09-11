@@ -40,6 +40,7 @@ pipeline {
             steps {
                 echo "Integrate a code analysis tool (e.g., SonarQube) to analyze the code"
             }
+        }
 
         stage('Security Scan') {
             steps {
